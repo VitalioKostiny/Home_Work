@@ -1,7 +1,9 @@
 import json
 from typing import List, Dict
+from dataclasses import dataclass
 
 
+@dataclass
 class Palindrome:
     """
     Класс для представления палиндромов.
@@ -12,10 +14,8 @@ class Palindrome:
     meaning : str
         Строка, описывающая значение слова.
     """
-
-    def __init__(self, word: str, meaning: str) -> None:
-        self.word = word
-        self.meaning = meaning
+    word: str
+    meaning: str
 
     def __bool__(self) -> bool:
         """
