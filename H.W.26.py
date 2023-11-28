@@ -3,10 +3,6 @@ from typing import List, Dict
 from dataclasses import dataclass
 from cities import cities
 
-import json
-from dataclasses import dataclass, field
-from typing import List
-
 
 @dataclass
 class City:
