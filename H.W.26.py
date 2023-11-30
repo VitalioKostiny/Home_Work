@@ -30,12 +30,32 @@ class DataValidator:
                 raise TypeError("Population should be a number")
 
 
+class DataSerializer:
+    @staticmethod
+    def serialize_to_json(cities_list, file_path):
+        serialized_cities = [{"name": city.name, "subject": city.subject, "population": city.population} for city in
+                             cities_list]
+        with open(file_path, 'w', encoding='utf-8') as f:
+            json.dump(serialized_cities, f, ensure_ascii=False, indent=4)
+
+
+class DataDeserializer:
+    @staticmethod
+    def deserialize_from_json(file_path):
+        with open(file_path, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+            cities = [City(name=city["name"], subject=city["subject"], population=city["population"]) for city in data]
+            return cities
+
+
 transformed_cities = []
 
 # Преобразование исходных данных в список экземпляров датакласса City
 for city_data in cities:
     transformed_city = City(name=city_data["name"], subject=city_data["subject"], population=city_data["population"])
     transformed_cities.append(transformed_city)
+
+
 
 # Удаление "плохих" городов
 transformed_cities = DataValidator.remove_cities_with_bad_letters(transformed_cities)
@@ -44,5 +64,8 @@ transformed_cities = DataValidator.remove_cities_with_bad_letters(transformed_ci
 DataValidator.validate_data_types(transformed_cities)
 
 # Сериализация списка экземпляров датакласса в JSON и запись в файл
-with open('russian_cities.json', 'w', encoding='utf-8') as f:
-    json.dump([city.__dict__ for city in transformed_cities], f, ensure_ascii=False, indent=4)
+DataSerializer.serialize_to_json(transformed_cities, 'russian_cities.json')
+
+# Десериализация данных из файла в список объектов класса City
+deserialized_cities = DataDeserializer.deserialize_from_json('russian_cities.json')
+print(deserialized_cities)
