@@ -38,7 +38,8 @@ class DataValidator:
                     "population": {"type": "integer"},
                     "subject": {"type": "string"}
                 },
-                "required": ["name", "population", "subject"]
+                "required": ["name", "population", "subject"],
+                "additionalProperties": False
             }
         }
 
