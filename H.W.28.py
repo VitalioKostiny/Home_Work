@@ -7,7 +7,16 @@ from marshmallow import Schema, fields, validate
 from marshmallow_jsonschema import JSONSchema
 
 
-def get_weather(city_name):
+def get_weather(city_name: str) -> Optional[dict]:
+    """
+    Получает данные о погоде для указанного города.
+
+    Args:
+    city_name: Название города.
+
+    Returns:
+    dict: Данные о погоде в формате JSON.
+    """
     api_key = "748a58c619d858a68d8f4441207ea03c"  # Мой API ключ
     base_url = "https://api.openweathermap.org/data/2.5/weather"
     params = {
@@ -25,6 +34,9 @@ def get_weather(city_name):
 
 @dataclass
 class CurrentWeather:
+    """
+    Класс для хранения данных о текущей погоде.
+    """
     city_name: str
     country: str
     temperature: float
@@ -44,6 +56,9 @@ class CurrentWeather:
 
 
 class CurrentWeatherSchema(Schema):
+    """
+    Схема для валидации и сериализации данных о текущей погоде.
+    """
     city_name = fields.Str(required=True)
     country = fields.Str(required=True)
     temperature = fields.Float(required=True)
@@ -73,3 +88,4 @@ if __name__ == "__main__":
             json.dump(json_schema, file, indent=4)
     else:
         print("Не удалось получить данные о погоде для указанного города.")
+
