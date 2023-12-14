@@ -1,0 +1,81 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "definitions": {
+        "ExtendedWeatherSchema": {
+            "properties": {
+                "city_name": {
+                    "title": "city_name",
+                    "type": "string"
+                },
+                "description": {
+                    "title": "description",
+                    "type": "string"
+                },
+                "humidity": {
+                    "title": "humidity",
+                    "type": "integer",
+                    "description": "Влажность воздуха в процентах",
+                    "minimum": 0,
+                    "maximum": 100
+                },
+                "pressure": {
+                    "title": "pressure",
+                    "type": "integer",
+                    "description": "Атмосферное давление в гПа",
+                    "minimum": 0
+                },
+                "sunrise": {
+                    "title": "sunrise",
+                    "type": [
+                        "integer",
+                        "null"
+                    ],
+                    "description": "Время восхода солнца в UNIX-формате"
+                },
+                "sunset": {
+                    "title": "sunset",
+                    "type": [
+                        "integer",
+                        "null"
+                    ],
+                    "description": "Время заката солнца в UNIX-формате"
+                },
+                "temperature": {
+                    "title": "temperature",
+                    "type": "number",
+                    "format": "float",
+                    "description": "Температура в градусах Цельсия",
+                    "minimum": -100,
+                    "maximum": 100
+                },
+                "visibility": {
+                    "title": "visibility",
+                    "type": [
+                        "integer",
+                        "null"
+                    ],
+                    "description": "Видимость в метрах",
+                    "minimum": 0
+                },
+                "wind_speed": {
+                    "title": "wind_speed",
+                    "type": "number",
+                    "format": "float",
+                    "description": "Скорость ветра в м/с",
+                    "minimum": 0
+                }
+            },
+            "type": "object",
+            "required": [
+                "city_name",
+                "description",
+                "humidity",
+                "pressure",
+                "temperature",
+                "wind_speed"
+            ],
+            "additionalProperties": false
+        }
+    },
+    "$ref": "#/definitions/ExtendedWeatherSchema"
+}
