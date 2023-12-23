@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 
+
 class IngredientFactory(ABC):
     @abstractmethod
     def create_cheese(self, cheese_type: str) -> str:
